@@ -65,7 +65,95 @@ pub fn insertion_sort<T: PartialOrd>(arr: &mut [T]) {
   }
 }
 
-// TODO: Quick sort
+/// Wraps the Quick Sort algorithm for sorting an array in place.
+///
+/// # Arguments
+///
+/// * `arr` - A mutable slice of elements that implement the `PartialOrd` and `Copy` traits.
+///
+/// # Example
+///
+/// ```
+/// let mut arr = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
+/// quick_sort(&mut arr);
+/// assert_eq!(arr, [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]);
+/// ```
+pub fn quick_sort<T: PartialOrd + Copy>(arr: &mut [T]) {
+  if arr.is_empty() {
+    return;
+  }
+  recursive_quick_sort(arr, 0, arr.len() - 1);
+}
+
+/// Recursively sorts an array in place using the Quick Sort algorithm.
+///
+/// # Arguments
+///
+/// * `arr` - A mutable slice of elements that implement the `PartialOrd` and `Copy` traits.
+/// * `lower_bound` - The starting index of the slice to be sorted.
+/// * `upper_bound` - The ending index of the slice to be sorted.
+///
+/// This function is called by `quick_sort` and should not be used directly.
+///
+/// # Example
+///
+/// ```
+/// let mut arr = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
+/// recursive_quick_sort(&mut arr, 0, arr.len() - 1);
+/// assert_eq!(arr, [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]);
+/// ```
+fn recursive_quick_sort<T: PartialOrd + Copy>(
+  arr: &mut [T],
+  lower_bound: usize,
+  upper_bound: usize,
+) {
+  if lower_bound >= upper_bound {
+    return;
+  }
+  let pivot_index = partition(arr, lower_bound, upper_bound);
+  if pivot_index > 0 {
+    recursive_quick_sort(arr, lower_bound, pivot_index - 1);
+  }
+  recursive_quick_sort(arr, pivot_index + 1, upper_bound);
+}
+
+/// Partitions the array around a pivot element for the Quick Sort algorithm.
+///
+/// This function selects the last element as the pivot and rearranges the array
+/// such that all elements less than the pivot are on the left, and all elements
+/// greater than or equal to the pivot are on the right. It then returns the index
+/// of the pivot element after partitioning.
+///
+/// # Arguments
+///
+/// * `arr` - A mutable slice of elements that implement the `PartialOrd` and `Copy` traits.
+/// * `lower_bound` - The starting index of the slice to be partitioned.
+/// * `upper_bound` - The ending index of the slice to be partitioned.
+///
+/// # Returns
+///
+/// The index of the pivot element after partitioning.
+///
+/// # Example
+///
+/// ```
+/// let mut arr = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
+/// let pivot_index = partition(&mut arr, 0, arr.len() - 1);
+/// assert_eq!(pivot_index, 4); // Example index, actual value may vary
+/// ```
+fn partition<T: PartialOrd + Copy>(arr: &mut [T], lower_bound: usize, upper_bound: usize) -> usize {
+  let pivot = arr[upper_bound];
+  let mut left_item = lower_bound as isize - 1;
+  for right_item in lower_bound..upper_bound {
+    if arr[right_item] < pivot {
+      left_item += 1;
+      arr.swap(left_item as usize, right_item);
+    }
+  }
+  let new_pivot = (left_item + 1) as usize;
+  arr.swap(new_pivot, upper_bound);
+  new_pivot
+}
 // TODO: Merge sort
 
 #[cfg(test)]
@@ -93,13 +181,13 @@ mod tests {
     assert_eq!(arr, [1, 2, 3, 4, 5]);
   }
 
-  // #[test]
-  // fn test_quick_sort() {
-  //     let mut arr = [5, 3, 2, 4, 1];
-  //     quick_sort(&mut arr);
-  //     assert_eq!(arr, [1, 2, 3, 4, 5]);
-  // }
-  //
+  #[test]
+  fn test_quick_sort() {
+    let mut arr = [5, 3, 2, 4, 1];
+    quick_sort(&mut arr);
+    assert_eq!(arr, [1, 2, 3, 4, 5]);
+  }
+
   // #[test]
   // fn test_merge_sort() {
   //     let mut arr = [5, 3, 2, 4, 1];

@@ -3,6 +3,8 @@ mod algorithms;
 use algorithms::*;
 use std::time::Instant;
 
+const PADDING_SIZE: usize = 12;
+
 fn main() {
   {
     let mut arr = [2, 42, 39, 10, 76, 432, 42, 97];
@@ -19,11 +21,11 @@ fn main() {
     header("insertion sort");
     body(insertion_sort, &mut arr);
   }
-  // {
-  //     let mut arr = [98, 33, 24, 69, 11, 2, 42, 7];
-  //     header("quick sort");
-  //     body(quick_sort, &mut arr);
-  // }
+  {
+    let mut arr = [98, 33, 24, 69, 11, 2, 42, 7];
+    header("quick sort");
+    body(quick_sort, &mut arr);
+  }
   // {
   //     let mut arr = [35, 12, 2, 90, 42, 78, 9, 10];
   //     header("merge sort");
@@ -32,7 +34,7 @@ fn main() {
 }
 
 fn header(test: &str) {
-  let padding = "=".repeat(12);
+  let padding = "=".repeat(PADDING_SIZE);
   println!("{}[ {} ]{}", padding, test, padding)
 }
 
