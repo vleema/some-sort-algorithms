@@ -1,48 +1,59 @@
 mod algorithms;
 
 use algorithms::*;
-use std::time::Instant;
+use rand::Rng;
+use std::{any::Any, io::Write, time::Instant};
 
-const PADDING_SIZE: usize = 12;
+const TEN: usize = 10;
+const ENTRY_SIZE: usize = 1000;
+
+type SortFn<T> = fn(&mut [T]);
 
 fn main() {
-  {
-    let mut arr = [2, 42, 39, 10, 76, 432, 42, 97];
-    header("selection sort");
-    body(selection_sort, &mut arr);
+  let sort_functions = Vec::from([
+    ("SELECTION SORT", selection_sort as SortFn<i32>),
+    ("BUBBLE SORT", bubble_sort),
+    ("INSERTION SORT", insertion_sort),
+    ("QUICK SORT", quick_sort),
+  ]);
+
+  let title = "Performance test for sort algorthms";
+  println!("{}\n{}\n", title, "=".repeat(title.len()));
+
+  for n in 1..=4 {
+    run_entry(&sort_functions, TEN.pow(n));
   }
-  {
-    let mut arr = [35, 12, 2, 90, 42, 78, 9, 10];
-    header("bubble sort");
-    body(bubble_sort, &mut arr);
-  }
-  {
-    let mut arr = [365, 72, 2, 90, 42, 78, 9, 10];
-    header("insertion sort");
-    body(insertion_sort, &mut arr);
-  }
-  {
-    let mut arr = [98, 33, 24, 69, 11, 2, 42, 7];
-    header("quick sort");
-    body(quick_sort, &mut arr);
-  }
-  // {
-  //     let mut arr = [35, 12, 2, 90, 42, 78, 9, 10];
-  //     header("merge sort");
-  //     body(merge_sort, &mut arr);
-  // }
+  // run_entry(&sort_functions, ENTRY_SIZE);
 }
 
-fn header(test: &str) {
-  let padding = "=".repeat(PADDING_SIZE);
-  println!("{}[ {} ]{}", padding, test, padding)
+fn run_entry(functions: &Vec<(&str, SortFn<i32>)>, entry_size: usize) {
+  let gen_start = Instant::now();
+  print!("Generating list with {} entries", entry_size);
+  let list = gen_random_list(entry_size);
+  println!(" ... ({:?})\n", gen_start.elapsed());
+
+  for (func_name, func) in functions {
+    println!("{}:", func_name);
+    print!("  >>> Cloning ... ");
+    std::io::stdout().flush().unwrap();
+    let clone_start = Instant::now();
+    let mut list_copy = list.clone();
+    println!("finished in {:?}", clone_start.elapsed());
+
+    print!("  >>> Running ... ");
+    std::io::stdout().flush().unwrap();
+    let run_start = Instant::now();
+    func(&mut list_copy);
+    println!("finished in {:?}\n", run_start.elapsed())
+  }
+  println!("{}\n", "-".repeat(50));
 }
 
-fn body<T: std::fmt::Debug>(f: fn(&mut [T]), arr: &mut [T]) {
-  println!(">>> Array before sorting: {:?}", arr);
-  let start = Instant::now();
-  f(arr);
-  let duration = start.elapsed();
-  println!(">>> Array after sorting:  {:?}", arr);
-  println!(" -- Time taken: {:?}\n", duration);
+fn gen_random_list(size: usize) -> Vec<i32> {
+  let mut rng = rand::thread_rng();
+  let mut arr = Vec::with_capacity(size);
+  for _ in 0..size {
+    arr.push(rng.gen::<i32>());
+  }
+  arr
 }
