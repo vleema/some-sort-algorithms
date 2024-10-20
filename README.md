@@ -1,10 +1,23 @@
-# sort_algorithms-edb1
+# Some classic sorting algorithms
 
-- Merge sort 
+Those are:
+
+- Merge sort  (Not implemented yet)
 - Quick sort
 - Selection sort
 - Insertion sort
 
-
 Made in rust  :crab:
 
+## Usage
+
+Once with `rust` and `cargo` correctly installed, just run:
+
+```terminal
+cargo run
+```
+
+In the future i plan to make this repo as assignment for those interested in implementing these algorithms. Also, this may be used in a college work so if you study with me please don't copy.
+
+---
+&copy;u
