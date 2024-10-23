@@ -6,6 +6,7 @@ Those are:
 - Quick sort
 - Selection sort
 - Insertion sort
+- Bubble sort
 
 Made in rust  :crab:
 

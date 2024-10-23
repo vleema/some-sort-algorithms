@@ -25,6 +25,19 @@ pub fn selection_sort<T: PartialOrd>(arr: &mut [T]) {
   }
 }
 
+/// Sorts an array in place using the bubble sort algorithm
+///
+/// # Arguments
+///
+/// * `arr` - A mutable slice of elements that implement the `PartialOrd` trait
+///
+/// # Example
+///
+/// ```
+/// let mut arr = [5, 3, 8, 4, 2];
+/// bubble_sort(&mut arr);
+/// assert_eq!(arr, [2, 3, 4, 5, 8]);
+/// ```
 pub fn bubble_sort<T: PartialOrd>(arr: &mut [T]) {
   let mut n = arr.len();
   let mut swapped = true;
