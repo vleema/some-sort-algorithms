@@ -16,18 +16,7 @@ assert_eq!(arr, vec![1, 2, 3, 4, 5]);
 ```
 */
 pub fn selection_sort<T: PartialOrd>(arr: &mut [T]) {
-  if arr.len() <= 1 {
-    return;
-  }
-  for i in 0..arr.len() - 1 {
-    let mut min_index = i;
-    for j in (i + 1)..arr.len() {
-      if arr[j] < arr[min_index] {
-        min_index = j;
-      }
-    }
-    arr.swap(min_index, i);
-  }
+  todo!()
 }
 
 /**
@@ -46,21 +35,7 @@ assert_eq!(arr, [2, 3, 4, 5, 8]);
 ```
 */
 pub fn bubble_sort<T: PartialOrd>(arr: &mut [T]) {
-  if arr.len() <= 1 {
-    return;
-  }
-  let mut n = arr.len();
-  let mut swapped = true;
-  while swapped {
-    swapped = false;
-    for i in 1..n {
-      if arr[i - 1] > arr[i] {
-        arr.swap(i - 1, i);
-        swapped = true;
-      }
-    }
-    n -= 1;
-  }
+  todo!()
 }
 
 /**
@@ -81,65 +56,26 @@ assert_eq!(arr, vec![1, 2, 3, 4, 5]);
 ```
 */
 pub fn insertion_sort<T: PartialOrd>(arr: &mut [T]) {
-  for i in 1..arr.len() {
-    let mut j = i;
-    while j > 0 && arr[j] < arr[j - 1] {
-      arr.swap(j, j - 1);
-      j -= 1;
-    }
-  }
+  todo!()
 }
 
-/// Wraps the Quick Sort algorithm for sorting an array in place.
-///
-/// # Arguments
-///
-/// * `arr` - A mutable slice of elements that implement the `PartialOrd` and `Copy` traits.
-///
-/// # Example
-///
-/// ```
-/// let mut arr = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
-/// quick_sort(&mut arr);
-/// assert_eq!(arr, [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]);
-/// ```
+/**
+Wraps the Quick Sort algorithm for sorting an array in place.
+
+# Arguments
+
+* `arr` - A mutable slice of elements that implement the `PartialOrd` and `Copy` traits.
+
+# Example
+
+```
+let mut arr = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
+quick_sort(&mut arr);
+assert_eq!(arr, [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]);
+```
+*/
 pub fn quick_sort<T: PartialOrd + Copy>(arr: &mut [T]) {
-  if arr.is_empty() {
-    return;
-  }
-  recursive_quick_sort(arr, 0, arr.len() - 1);
-}
-
-/// Recursively sorts an array in place using the Quick Sort algorithm.
-///
-/// # Arguments
-///
-/// * `arr` - A mutable slice of elements that implement the `PartialOrd` and `Copy` traits.
-/// * `lower_bound` - The starting index of the slice to be sorted.
-/// * `upper_bound` - The ending index of the slice to be sorted.
-///
-/// This function is called by `quick_sort` and should not be used directly.
-///
-/// # Example
-///
-/// ```
-/// let mut arr = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
-/// recursive_quick_sort(&mut arr, 0, arr.len() - 1);
-/// assert_eq!(arr, [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]);
-/// ```
-fn recursive_quick_sort<T: PartialOrd + Copy>(
-  arr: &mut [T],
-  lower_bound: usize,
-  upper_bound: usize,
-) {
-  if lower_bound >= upper_bound {
-    return;
-  }
-  let pivot_index = partition(arr, lower_bound, upper_bound);
-  if pivot_index > 0 {
-    recursive_quick_sort(arr, lower_bound, pivot_index - 1);
-  }
-  recursive_quick_sort(arr, pivot_index + 1, upper_bound);
+  todo!()
 }
 
 /**
@@ -169,17 +105,7 @@ assert_eq!(pivot_index, 4); // Example index, actual value may vary
 ```
 */
 fn partition<T: PartialOrd + Copy>(arr: &mut [T], lower_bound: usize, upper_bound: usize) -> usize {
-  let pivot = arr[upper_bound];
-  let mut left_item = lower_bound as isize - 1;
-  for right_item in lower_bound..upper_bound {
-    if arr[right_item] < pivot {
-      left_item += 1;
-      arr.swap(left_item as usize, right_item);
-    }
-  }
-  let new_pivot = (left_item + 1) as usize;
-  arr.swap(new_pivot, upper_bound);
-  new_pivot
+  todo!()
 }
 
 /**
@@ -198,23 +124,7 @@ assert_eq!(arr, [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]);
 ```
 */
 pub fn merge_sort<T: PartialOrd + Copy>(arr: &mut [T]) {
-  if arr.len() <= 1 {
-    return;
-  }
-  let mut temp_arr = arr.to_vec();
-  let mut segment_size = 1;
-  let arr_len = arr.len();
-  while segment_size < arr.len() {
-    let mut start = 0;
-    while start < arr_len {
-      let mid = (start + segment_size).min(arr_len);
-      let end = (start + 2 * segment_size).min(arr_len);
-      merge(&mut temp_arr[start..end], &arr[start..mid], &arr[mid..end]);
-      start += 2 * segment_size;
-    }
-    arr.copy_from_slice(&temp_arr);
-    segment_size *= 2;
-  }
+  todo!()
 }
 
 /**
@@ -237,29 +147,7 @@ assert_eq!(arr, [1, 2, 3, 4, 5, 6]);
 ```
 */
 fn merge<T: PartialOrd + Copy>(arr: &mut [T], left_arr: &[T], right_arr: &[T]) {
-  let left_arr_len = left_arr.len();
-  let right_arr_len = right_arr.len();
-  let (mut i, mut l, mut r) = (0, 0, 0);
-  while l < left_arr_len && r < right_arr_len {
-    if left_arr[l] < right_arr[r] {
-      arr[i] = left_arr[l];
-      l += 1;
-    } else {
-      arr[i] = right_arr[r];
-      r += 1;
-    }
-    i += 1;
-  }
-  while l < left_arr_len {
-    arr[i] = left_arr[l];
-    i += 1;
-    l += 1;
-  }
-  while r < right_arr_len {
-    arr[i] = right_arr[r];
-    i += 1;
-    r += 1;
-  }
+  todo!()
 }
 
 #[cfg(test)]
