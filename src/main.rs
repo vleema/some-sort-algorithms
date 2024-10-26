@@ -15,6 +15,7 @@ fn main() {
     ("BUBBLE SORT", bubble_sort),
     ("INSERTION SORT", insertion_sort),
     ("QUICK SORT", quick_sort),
+    ("MERGE SORT", merge_sort),
   ]);
 
   let title = "Performance test for sort algorthms";
