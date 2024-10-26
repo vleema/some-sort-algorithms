@@ -90,19 +90,21 @@ pub fn insertion_sort<T: PartialOrd>(arr: &mut [T]) {
   }
 }
 
-/// Wraps the Quick Sort algorithm for sorting an array in place.
-///
-/// # Arguments
-///
-/// * `arr` - A mutable slice of elements that implement the `PartialOrd` and `Copy` traits.
-///
-/// # Example
-///
-/// ```
-/// let mut arr = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
-/// quick_sort(&mut arr);
-/// assert_eq!(arr, [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]);
-/// ```
+/**
+Wraps the Quick Sort algorithm for sorting an array in place.
+
+# Arguments
+
+* `arr` - A mutable slice of elements that implement the `PartialOrd` and `Copy` traits.
+
+# Example
+
+```
+let mut arr = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
+quick_sort(&mut arr);
+assert_eq!(arr, [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]);
+```
+*/
 pub fn quick_sort<T: PartialOrd + Copy>(arr: &mut [T]) {
   if arr.is_empty() {
     return;
@@ -110,23 +112,25 @@ pub fn quick_sort<T: PartialOrd + Copy>(arr: &mut [T]) {
   recursive_quick_sort(arr, 0, arr.len() - 1);
 }
 
-/// Recursively sorts an array in place using the Quick Sort algorithm.
-///
-/// # Arguments
-///
-/// * `arr` - A mutable slice of elements that implement the `PartialOrd` and `Copy` traits.
-/// * `lower_bound` - The starting index of the slice to be sorted.
-/// * `upper_bound` - The ending index of the slice to be sorted.
-///
-/// This function is called by `quick_sort` and should not be used directly.
-///
-/// # Example
-///
-/// ```
-/// let mut arr = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
-/// recursive_quick_sort(&mut arr, 0, arr.len() - 1);
-/// assert_eq!(arr, [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]);
-/// ```
+/**
+Recursively sorts an array in place using the Quick Sort algorithm.
+
+# Arguments
+
+* `arr` - A mutable slice of elements that implement the `PartialOrd` and `Copy` traits.
+* `lower_bound` - The starting index of the slice to be sorted.
+* `upper_bound` - The ending index of the slice to be sorted.
+
+This function is called by `quick_sort` and should not be used directly.
+
+# Example
+
+```
+let mut arr = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
+recursive_quick_sort(&mut arr, 0, arr.len() - 1);
+assert_eq!(arr, [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]);
+```
+*/
 fn recursive_quick_sort<T: PartialOrd + Copy>(
   arr: &mut [T],
   lower_bound: usize,
