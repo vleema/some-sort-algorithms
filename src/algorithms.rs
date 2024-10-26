@@ -16,6 +16,9 @@ assert_eq!(arr, vec![1, 2, 3, 4, 5]);
 ```
 */
 pub fn selection_sort<T: PartialOrd>(arr: &mut [T]) {
+  if arr.len() <= 1 {
+    return;
+  }
   for i in 0..arr.len() - 1 {
     let mut min_index = i;
     for j in (i + 1)..arr.len() {
@@ -43,6 +46,9 @@ assert_eq!(arr, [2, 3, 4, 5, 8]);
 ```
 */
 pub fn bubble_sort<T: PartialOrd>(arr: &mut [T]) {
+  if arr.len() <= 1 {
+    return;
+  }
   let mut n = arr.len();
   let mut swapped = true;
   while swapped {
@@ -291,12 +297,30 @@ mod tests {
   }
 
   #[test]
+  fn test_selection_sort() {
+    reverse_list_test(selection_sort);
+    duplicates_list_test(selection_sort);
+    already_sorted_list_test(selection_sort);
+    singleton_list_test(selection_sort);
+    empty_list_test(selection_sort);
+  }
+
+  #[test]
   fn test_bubble_sort() {
     reverse_list_test(bubble_sort);
     duplicates_list_test(bubble_sort);
     already_sorted_list_test(bubble_sort);
     singleton_list_test(bubble_sort);
     empty_list_test(bubble_sort);
+  }
+
+  #[test]
+  fn test_insertion_sort() {
+    reverse_list_test(insertion_sort);
+    duplicates_list_test(insertion_sort);
+    already_sorted_list_test(insertion_sort);
+    singleton_list_test(insertion_sort);
+    empty_list_test(insertion_sort);
   }
 
   #[test]

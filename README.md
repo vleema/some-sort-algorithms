@@ -2,13 +2,13 @@
 
 Those are:
 
-- Merge sort  (Not implemented yet)
+- Merge sort
 - Quick sort
 - Selection sort
 - Insertion sort
 - Bubble sort
 
-Made in rust  :crab:
+Made in rust :crab:
 
 ## Usage
 
@@ -21,4 +21,5 @@ cargo run
 In the future i plan to make this repo as assignment for those interested in implementing these algorithms. Also, this may be used in a college work so if you study with me please don't copy.
 
 ---
+
 &copy;u
