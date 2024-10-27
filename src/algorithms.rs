@@ -1,11 +1,11 @@
 /**
 Sorts a slice in place using the selection sort algorithm.
 
-It iterates over the slice and for each element, finds the smallest item in the rest of the slice and swaps it with the current element.
+Selection sort is an in-place comparison sorting algorithm. It divides the input list into two parts: the sublist of items already sorted, which is built up from left to right at the front (left) of the list, and the sublist of items remaining to be sorted that occupy the rest of the list. Initially, the sorted sublist is empty, and the unsorted sublist is the entire input list. The algorithm proceeds by finding the smallest (or largest, depending on sorting order) element from the unsorted sublist, swapping it with the leftmost unsorted element (putting it in sorted order), and moving the sublist boundaries one element to the right.
 
 # Arguments
 
-* `arr` - A mutable slice of elements implementing `PartialOrd`.
+* `arr` - A mutable slice of elements that implement the `PartialOrd` trait. This slice will be sorted in place.
 
 # Example
 
@@ -14,6 +14,12 @@ let mut arr = vec![5, 3, 2, 4, 1];
 selection_sort(&mut arr);
 assert_eq!(arr, vec![1, 2, 3, 4, 5]);
 ```
+
+# Characteristics
+
+* Stable: No
+* Adaptive: No
+* In-place: Yes
 */
 pub fn selection_sort<T: PartialOrd>(arr: &mut [T]) {
   todo!()
@@ -21,6 +27,8 @@ pub fn selection_sort<T: PartialOrd>(arr: &mut [T]) {
 
 /**
 Sorts an array in place using the bubble sort algorithm
+
+Bubble sort is a simple sorting algorithm that repeatedly steps through the list, compares adjacent elements, and swaps them if they are in the wrong order. The pass through the list is repeated until the list is sorted. The algorithm gets its name because smaller elements "bubble" to the top of the list.
 
 # Arguments
 
@@ -33,6 +41,11 @@ let mut arr = [5, 3, 8, 4, 2];
 bubble_sort(&mut arr);
 assert_eq!(arr, [2, 3, 4, 5, 8]);
 ```
+# Characteristics
+
+* Stable: Yes
+* Adaptive: Yes, if implemented with a flag to stop early if no swaps are made in a pass.
+* In-place: Yes
 */
 pub fn bubble_sort<T: PartialOrd>(arr: &mut [T]) {
   todo!()
@@ -54,6 +67,11 @@ let mut arr = vec![5, 3, 2, 4, 1];
 insertion_sort(&mut arr);
 assert_eq!(arr, vec![1, 2, 3, 4, 5]);
 ```
+# Characteristics
+
+* Stable: Yes
+* Adaptive: Yes, if implemented with a flag to stop early if no swaps are made in a pass.
+* In-place: Yes
 */
 pub fn insertion_sort<T: PartialOrd>(arr: &mut [T]) {
   todo!()
@@ -61,6 +79,8 @@ pub fn insertion_sort<T: PartialOrd>(arr: &mut [T]) {
 
 /**
 Wraps the Quick Sort algorithm for sorting an array in place.
+
+It works by selecting a 'pivot' element from the array and partitioning the other elements into two sub-arrays, according to whether they are less than or greater than the pivot. The sub-arrays are then sorted recursively.
 
 # Arguments
 
@@ -73,6 +93,12 @@ let mut arr = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
 quick_sort(&mut arr);
 assert_eq!(arr, [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]);
 ```
+
+# Characteristics
+
+* Stable: No
+* Adaptive: No
+* In-place: Yes
 */
 pub fn quick_sort<T: PartialOrd + Copy>(arr: &mut [T]) {
   todo!()
@@ -111,6 +137,8 @@ fn partition<T: PartialOrd + Copy>(arr: &mut [T], lower_bound: usize, upper_boun
 /**
 Sorts an array using a iterative version of the Merge Sort algorithm.
 
+It works by recursively dividing the array into two halves, sorting each half, and then merging the sorted halves back together.
+
 # Arguments
 
 * `arr` - A mutable slice of elements that implement `PartialOrd` and `Copy`.
@@ -122,6 +150,12 @@ let mut arr = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
 merge_sort(&mut arr);
 assert_eq!(arr, [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]);
 ```
+
+# Characteristics
+
+* Stable: Yes
+* Adaptive: No
+* In-place: No
 */
 pub fn merge_sort<T: PartialOrd + Copy>(arr: &mut [T]) {
   todo!()
@@ -144,7 +178,13 @@ let right_arr = [2, 4, 6];
 let mut arr = [0; 6];
 merge(&mut arr, &left_arr, &right_arr);
 assert_eq!(arr, [1, 2, 3, 4, 5, 6]);
+
 ```
+# Characteristics
+
+* Stable: Yes
+* Adaptive: No
+* In-place: No
 */
 fn merge<T: PartialOrd + Copy>(arr: &mut [T], left_arr: &[T], right_arr: &[T]) {
   todo!()
