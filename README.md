@@ -1,6 +1,6 @@
 # Some classic sorting algorithms
 
-Those are:
+Hi visitor :alien: I challenge you to implement these algorithms in Rust :crab:
 
 - Merge sort
 - Quick sort
@@ -8,18 +8,24 @@ Those are:
 - Insertion sort
 - Bubble sort
 
-Made in rust :crab:
+> In the `src/algorithms.rs` files are the descriptions of these algorithms, and a overview of the implementation.
 
-## Usage
+To test your implementation, you may run the program with:
 
-Once with `rust` and `cargo` correctly installed, just run:
+```terminal
+cargo test
+```
+
+If you want to see the performance of your implementation you may run with:
 
 ```terminal
 cargo run
 ```
 
-In the future i plan to make this repo as assignment for those interested in implementing these algorithms. Also, this may be used in a college work so if you study with me please don't copy.
+or
 
----
+```terminal
+cargo run --release
+```
 
-&copy;u
+To compile and run with all runtime optimizations.
